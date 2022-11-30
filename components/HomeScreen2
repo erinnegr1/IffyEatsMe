@@ -1,0 +1,16 @@
+import * as React from 'react'
+import { Button, Image, Text, View } from 'react-native';
+
+export default function HomeScreen2() {
+  return (
+    <View style={styles.container}>
+    <Image style={styles.img} source={require('./assets/Feed-Your-Hangry.png')} />
+    <Text style={styles.text}>Welcome to Iffy Eats!</Text>
+    <Button
+    onPress={() => alert('Allow app to use location?')}
+    title="Click to Feed Your Hangry"
+    color={'hotpink'}
+    />
+  </View>
+);
+}
