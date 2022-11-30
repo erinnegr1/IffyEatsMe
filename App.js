@@ -6,15 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Stack = createNativeStackNavigator();
 
-function SetLocation() {
-  return (
-    <View>
-      <Text>Enter Zip Code</Text>
-    </View>
-  )
-}
-
-function HomeScreen(navigation) {
+function HomeScreen({navigation}) {
   const onPressHandler =() =>{
     navigation.navigate('Location')
   }
@@ -25,7 +17,7 @@ function HomeScreen(navigation) {
     <View>
     <Pressable
       style={({pressed})=>({backgroundColor: pressed ? 'purple':'hotpink'})}
-      onPress={onPressHandler()}
+      onPress={onPressHandler}
       >
       <Text>Click to go to Location Page</Text>
     </Pressable>
@@ -35,7 +27,22 @@ function HomeScreen(navigation) {
   )
 }
 
-
+function SetLocation({navigation}) {
+  const onPressHandler = () => {
+    navigation.navigate('Iffy Eats')
+  }
+  return (
+    <View>
+      <Text>Enter Zip Code</Text>
+      <Pressable
+      style={({pressed})=>({backgroundColor: pressed ? 'purple':'hotpink'})}
+      onPress={onPressHandler}
+      >
+      <Text>Click to go to Home Page</Text>
+    </Pressable>
+    </View>
+  )
+}
 
 
 
