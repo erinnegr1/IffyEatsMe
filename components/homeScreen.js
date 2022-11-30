@@ -1,25 +1,23 @@
-import React from 'react';
-import { StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
+import React from 'react'
+import { StatusBar } from 'expo-status-bar';
+import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
 
-function SetLocation({navigation}) {
-    const onPressHandler = () => {
-      navigation.navigate('Iffy Eats')
+function HomeScreen({navigation}) {
+    const onPressHandler =() =>{
+      navigation.navigate('Location')
     }
     return (
       <View style={styles.container}>
-          <TextInput
-        style={styles.input}
-        placeholder='Zip Code'
-        keyboardType='numeric'
-        maxLength={5}
-        />
-        <Pressable
+      <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
+      <Text style={styles.text}>Welcome to Iffy Eats!</Text>
+      <Pressable
         style={({pressed})=>[({backgroundColor: pressed ? 'purple':'hotpink'}), styles.wrapperCustom]}
         onPress={onPressHandler}
         >
-        <Text>Click to go to Home Page</Text>
+        <Text>Click to feed your hangry</Text>
       </Pressable>
-      </View>
+      <StatusBar style="auto" />
+    </View>
     )
   }
 
@@ -52,6 +50,5 @@ function SetLocation({navigation}) {
       padding: 6
     }
   });
-  
 
-export default SetLocation
+export default HomeScreen
