@@ -5,6 +5,7 @@ import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-nativ
 function HomeScreen({navigation}) {
     const onPressHandler =() =>{
       navigation.navigate('Location')
+      alert('Hello')
     }
     return (
       <View style={styles.container}>

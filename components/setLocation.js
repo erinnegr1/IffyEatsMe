@@ -3,13 +3,15 @@ import { StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
 
 function SetLocation({navigation}) {
     const onPressHandler = () => {
-      navigation.navigate('Iffy Eats')
+      navigation.navigate('Object')
     }
     return (
       <View style={styles.container}>
           <TextInput
         style={styles.input}
         placeholder='Zip Code'
+        placeholderTextColor='darkslateblue'
+        selectionColor='lavender'
         keyboardType='numeric'
         maxLength={5}
         />
@@ -17,7 +19,7 @@ function SetLocation({navigation}) {
         style={({pressed})=>[({backgroundColor: pressed ? 'purple':'hotpink'}), styles.wrapperCustom]}
         onPress={onPressHandler}
         >
-        <Text>Click to go to Home Page</Text>
+        <Text>Animate Object</Text>
       </Pressable>
       </View>
     )
