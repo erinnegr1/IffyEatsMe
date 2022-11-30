@@ -1,12 +1,80 @@
+import * as React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, View, Alert, Pressable } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+const Stack = createNativeStackNavigator();
+
+function SetLocation() {
+  return (
+    <View>
+      <Text>Enter Zip Code</Text>
+    </View>
+  )
+}
+
+function HomeScreen(navigation) {
+  const onPressHandler =() =>{
+    navigation.navigate('Location')
+  }
+  return (
+    <View style={styles.container}>
+    <Image style={styles.img} source={require('./assets/Feed-Your-Hangry.png')} />
+    <Text style={styles.text}>Click to Feed Your Hangry</Text>
+    <View>
+    <Pressable
+      style={({pressed})=>({backgroundColor: pressed ? 'purple':'hotpink'})}
+      onPress={onPressHandler()}
+      >
+      <Text>Click to go to Location Page</Text>
+    </Pressable>
+    </View>
+    <StatusBar style="auto" />
+  </View>
+  )
+}
+
+
+
+
+
+
+
+
+function HomeScreen2() {
+  return (
+    <View style={styles.container}>
+    <Image style={styles.img} source={require('./assets/Feed-Your-Hangry.png')} />
+    <Text style={styles.text}>Welcome to Iffy Eats!</Text>
+    <Button
+    onPress={() => alert('Allow app to use location?')}
+    title="Click to Feed Your Hangry"
+    color={'hotpink'}
+    />
+  </View>
+);
+}
+
+function SetLocation2() {
+  return (
+    <View>
+      <Text>Enter Zip Code</Text>
+    </View>
+  )
+}
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+
+      <Stack.Screen name="Iffy Eats" component={HomeScreen} />
+      <Stack.Screen name='Location' component={SetLocation} />
+      
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -17,4 +85,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  img: {
+    height: 300,
+    width: 300,
+    margin: 10
+  },
+  text: {
+    margin: 10
+  },
+  button: {
+    margin: 10,
+    padding: 10
+  }
 });
