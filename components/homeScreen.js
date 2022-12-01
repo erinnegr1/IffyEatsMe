@@ -4,16 +4,32 @@ import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-nativ
 import * as Location from 'expo-location';
 
 function HomeScreen({ navigation }) {
-  //try to put onPressHandler inside useEffect
+
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-    
-  useEffect(() => {
-    (async () => {
 
+  const onPressHandler = () => {
+    (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
+        alert('Please go to settings and allow location services');
+        console.log('Location permission denied');
+        return;
+      }
+
+      let loc = await Location.getCurrentPositionAsync({});
+      console.log(loc)
+      setUserLocation(loc);
+    })()
+  }
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        console.log('Location permission denied');
         return;
       }
 
@@ -23,6 +39,22 @@ function HomeScreen({ navigation }) {
     })();
   }, []);
 
+  console.log(userlocation)
+
+  function latitude() {
+    if (userlocation) {
+      console.log(userlocation.coords.latitude)
+    }
+  }
+  latitude()
+
+  function longitude() {
+    if (userlocation) {
+      console.log(userlocation.coords.longitude)
+    }
+  }
+  longitude()
+
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
@@ -31,16 +63,11 @@ function HomeScreen({ navigation }) {
   }
 
 
-
-  const onPressHandler = () => {
-    navigation.navigate('Location')
-  
-  }
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
       <Text style={styles.text}>Welcome to Iffy Eats!</Text>
-      <View>
+      {!userlocation ? <View>
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={onPressHandler}
@@ -48,14 +75,22 @@ function HomeScreen({ navigation }) {
           <Text style={styles.btnText}>Use My Location</Text>
         </Pressable>
         <Text style={styles.textSpacer}>------------------- OR ------------------</Text>
-        <TextInput style={styles.input}></TextInput>
+        <TextInput
+          style={styles.input}
+          keyboardType={'default'}
+          placeholder={'Enter Address'}
+        ></TextInput>
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-          onPress={onPressHandler}
         >
           <Text style={styles.btnText}>Enter Address</Text>
         </Pressable>
-      </View>
+      </View> :
+        <Pressable
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+        >
+          <Text style={styles.btnText}>Click to feed your hangry!</Text>
+        </Pressable>}
       <StatusBar style="auto" />
     </View>
   )
@@ -92,9 +127,9 @@ const styles = StyleSheet.create({
     padding: 6,
     margin: 10,
     width: 150,
-    textAlign:'center',
+    textAlign: 'center',
     alignSelf: 'center',
-  }, 
+  },
   btnText: {
     textAlign: 'center'
   }

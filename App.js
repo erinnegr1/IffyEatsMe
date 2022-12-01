@@ -9,31 +9,6 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  // const [userlocation, setUserLocation] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
-
-  // useEffect(() => {
-  //   (async () => {
-      
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== 'granted') {
-  //       setErrorMsg('Permission to access location was denied');
-  //       return;
-  //     }
-
-  //     let loc = await Location.getCurrentPositionAsync({});
-  //     console.log(loc)
-  //     setUserLocation(loc);
-  //   })();
-  // }, []);
-
-  // let text = 'Waiting..';
-  // if (errorMsg) {
-  //   text = errorMsg;
-  // } else if (userlocation) {
-  //   text = JSON.stringify(userlocation);
-  // }
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
