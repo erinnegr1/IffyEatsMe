@@ -8,12 +8,28 @@ function HomeScreen({ navigation }) {
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
-  useEffect(() => {
+  const onPressHandler = () => {
     (async () => {
-
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
+        alert('Please go to settings and allow location services');
+        console.log('Location permission denied');
+        return;
+      }
+
+      let loc = await Location.getCurrentPositionAsync({});
+      console.log(loc)
+      setUserLocation(loc);
+    })()
+  }
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        console.log('Location permission denied');
         return;
       }
 
@@ -23,6 +39,22 @@ function HomeScreen({ navigation }) {
     })();
   }, []);
 
+  console.log(userlocation)
+
+  function latitude() {
+    if (userlocation) {
+      console.log(userlocation.coords.latitude)
+    }
+  }
+  latitude()
+
+  function longitude() {
+    if (userlocation) {
+      console.log(userlocation.coords.longitude)
+    }
+  }
+  longitude()
+
   let text = 'Waiting..';
   if (errorMsg) {
     text = errorMsg;
@@ -30,20 +62,35 @@ function HomeScreen({ navigation }) {
     text = JSON.stringify(userlocation);
   }
 
-  const onPressHandler = () => {
-    navigation.navigate('Location')
-    alert('Hello')
-  }
+
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
       <Text style={styles.text}>Welcome to Iffy Eats!</Text>
-      <Pressable
-        style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-        onPress={onPressHandler}
-      >
-        <Text>Click to feed your hangry</Text>
-      </Pressable>
+      {!userlocation ? <View>
+        <Pressable
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+          onPress={onPressHandler}
+        >
+          <Text style={styles.btnText}>Use My Location</Text>
+        </Pressable>
+        <Text style={styles.textSpacer}>------------------- OR ------------------</Text>
+        <TextInput
+          style={styles.input}
+          keyboardType={'default'}
+          placeholder={'Enter Address'}
+        ></TextInput>
+        <Pressable
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+        >
+          <Text style={styles.btnText}>Enter Address</Text>
+        </Pressable>
+      </View> :
+        <Pressable
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+        >
+          <Text style={styles.btnText}>Click to feed your hangry!</Text>
+        </Pressable>}
       <StatusBar style="auto" />
     </View>
   )
@@ -59,23 +106,32 @@ const styles = StyleSheet.create({
   img: {
     height: 300,
     width: 300,
-    margin: 10
+    margin: 30,
   },
   input: {
     borderWidth: 3,
     borderColor: "chartreuse",
-    fontSize: 30
+    fontSize: 30,
   },
   text: {
-    margin: 10
+    marginBottom: 60,
+    textAlign: 'center'
   },
-  button: {
-    margin: 10,
-    padding: 10
+  textSpacer: {
+    marginTop: 10,
+    marginBottom: 12,
+    textAlign: 'center'
   },
   wrapperCustom: {
     borderRadius: 8,
-    padding: 6
+    padding: 6,
+    margin: 10,
+    width: 150,
+    textAlign: 'center',
+    alignSelf: 'center',
+  },
+  btnText: {
+    textAlign: 'center'
   }
 });
 
