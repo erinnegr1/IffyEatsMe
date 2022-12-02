@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
 import * as Location from 'expo-location';
+import {Object} from './allComponents'
 
 function HomeScreen({ navigation }) {
 
@@ -62,6 +63,10 @@ function HomeScreen({ navigation }) {
     text = JSON.stringify(userlocation);
   }
 
+  const navToObject = () => {
+    navigation.navigate('Object')
+  }
+
 
   return (
     <View style={styles.container}>
@@ -88,6 +93,7 @@ function HomeScreen({ navigation }) {
       </View> :
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+          onPress={navToObject}
         >
           <Text style={styles.btnText}>Click to feed your hangry!</Text>
         </Pressable>}

@@ -5,8 +5,6 @@ import {HomeScreen, SetLocation, Object} from './components/allComponents'
 
 const Stack = createNativeStackNavigator();
 
-
-
 export default function App() {
 
   return (
@@ -14,8 +12,8 @@ export default function App() {
       <Stack.Navigator>
 
       <Stack.Screen name='Iffy Eats' component={HomeScreen} />
-      <Stack.Screen name='Location' component={SetLocation} />
-      {/* <Stack.Screen name='Object' component={Object} /> */}
+      {/* <Stack.Screen name='Location' component={SetLocation} /> */}
+      <Stack.Screen name='Object' component={Object} />
       
       </Stack.Navigator>
     </NavigationContainer>
