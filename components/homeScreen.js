@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
 import * as Location from 'expo-location';
-import {Object} from './allComponents'
+import { Object } from './allComponents'
 
 function HomeScreen({ navigation }) {
 
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [name, setName] = useState('');
 
   const onPressHandler = () => {
     (async () => {
@@ -67,6 +68,13 @@ function HomeScreen({ navigation }) {
     navigation.navigate('Object')
   }
 
+  const fetchName = async () => {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${name}`
+    );
+    const pokemon = await response.json();
+    console.log(pokemon);
+  }
 
   return (
     <View style={styles.container}>
@@ -85,19 +93,32 @@ function HomeScreen({ navigation }) {
           keyboardType={'default'}
           placeholder={'Enter Address'}
         ></TextInput>
+       
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
         >
           <Text style={styles.btnText}>Enter Address</Text>
         </Pressable>
       </View> :
+      <View>
+      <TextInput
+      placeholder='Name'
+      onChange = {e=>setName(e.target.value)}
+      ></TextInput>
+      <Pressable
+      style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+      onPress={fetchName}
+      >
+      </Pressable>
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={navToObject}
         >
           <Text style={styles.btnText}>Click to feed your hangry!</Text>
-        </Pressable>}
+        </Pressable>
       <StatusBar style="auto" />
+    </View>
+    }
     </View>
   )
 }
