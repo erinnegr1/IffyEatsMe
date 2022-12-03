@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
 import * as Location from 'expo-location';
+import cors from 'cors'
 import { Object } from './allComponents'
+//import YELP_API_KEY from '../.env'
 
 function HomeScreen({ navigation }) {
 
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [name, setName] = useState('');
+
+  console.log(YELP_API_KEY)
 
   const onPressHandler = () => {
     (async () => {
@@ -68,59 +72,84 @@ function HomeScreen({ navigation }) {
     navigation.navigate('Object')
   }
 
-  const fetchName = async () => {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    );
-    const pokemon = await response.json();
-    console.log(pokemon);
-  }
+  // const fetchName = async () => {
+  //   const response = await fetch(
+  //     `https://pokeapi.co/api/v2/pokemon/${name}`
+  //   );
+  //   const pokemon = await response.json();
+  //   console.log(pokemon);
+  // }
 
-  return (
-    <View style={styles.container}>
-      <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
-      <Text style={styles.text}>Welcome to Iffy Eats!</Text>
-      {!userlocation ? <View>
-        <Pressable
-          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-          onPress={onPressHandler}
-        >
-          <Text style={styles.btnText}>Use My Location</Text>
-        </Pressable>
-        <Text style={styles.textSpacer}>------------------- OR ------------------</Text>
-        <TextInput
-          style={styles.input}
-          keyboardType={'default'}
-          placeholder={'Enter Address'}
-        ></TextInput>
-       
-        <Pressable
-          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-        >
-          <Text style={styles.btnText}>Enter Address</Text>
-        </Pressable>
-      </View> :
-      <View>
-      <TextInput
-      placeholder='Name'
-      onChange = {e=>setName(e.target.value)}
-      ></TextInput>
+  const address = '40 Division Street NY NY 10002'
+  const radius = '8000'
+  const YELP_API_KEY = 'gChaVU_NPBoWTsWwmuSwZ4AbrwCyPuBFw9hHIe3irRKszbN22YZGUgbAssxD-HE8VGFLnLbQhpqyEmKl45I2BcRKdr9FSQuCMOMFIu1uf3_mrPdHeUPeBxaJv5SKY3Yx'
+
+  const getYelpRestaurants = async() => {
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${address}&term=food, restaurants&radius=${radius}`
+    const apiOptions = {
+      headers: {
+        // "Access-Control-Allow-Origin": "*", (Didnt work)
+        Authorization: `Bearer ${YELP_API_KEY}`,
+        crossorigin:true,
+      },
+    }
+    return await fetch(yelpUrl, apiOptions)
+      .then((res) => res.json())
+      .then((json) =>
+      console.log(json)
+        // setRestaurantData(
+        //   json.businesses.filter((business) =>
+        //     business.transactions.includes(activeTab.toLowerCase())
+          )
+      //   )
+      // );
+  };
+
+return (
+  <View style={styles.container}>
+    <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
+    <Text style={styles.text}>Welcome to Iffy Eats!</Text>
+    {!userlocation ? <View>
       <Pressable
-      style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-      onPress={fetchName}
+        style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+        onPress={onPressHandler}
       >
+        <Text style={styles.btnText}>Use My Location</Text>
       </Pressable>
+      <Text style={styles.textSpacer}>------------------- OR ------------------</Text>
+      <TextInput
+        style={styles.input}
+        keyboardType={'default'}
+        placeholder={'Enter Address'}
+      ></TextInput>
+
+      <Pressable
+        style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+      >
+        <Text style={styles.btnText}>Enter Address</Text>
+      </Pressable>
+    </View> :
+      <View>
+        <TextInput
+          placeholder='Name'
+          onChange={e => setName(e.target.value)}
+        ></TextInput>
+        <Pressable
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+          onPress={getYelpRestaurants}
+        >
+        </Pressable>
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={navToObject}
         >
           <Text style={styles.btnText}>Click to feed your hangry!</Text>
         </Pressable>
-      <StatusBar style="auto" />
-    </View>
+        <StatusBar style="auto" />
+      </View>
     }
-    </View>
-  )
+  </View>
+)
 }
 
 const styles = StyleSheet.create({
