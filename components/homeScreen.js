@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { Image, StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
 import * as Location from 'expo-location';
-import cors from 'cors'
-import { Object } from './allComponents'
 //import YELP_API_KEY from '../.env'
 
 function HomeScreen({ navigation }) {
@@ -11,6 +9,7 @@ function HomeScreen({ navigation }) {
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [name, setName] = useState('');
+  //const [userAddress, setAddress] = useState('')
 
   console.log(YELP_API_KEY)
 
@@ -47,19 +46,19 @@ function HomeScreen({ navigation }) {
 
   console.log(userlocation)
 
-  function latitude() {
-    if (userlocation) {
-      console.log(userlocation.coords.latitude)
-    }
-  }
-  latitude()
+  // function latitude() {
+  //   if (userlocation) {
+  //     console.log(userlocation.coords.latitude)
+  //   }
+  // }
+  // latitude()
 
-  function longitude() {
-    if (userlocation) {
-      console.log(userlocation.coords.longitude)
-    }
-  }
-  longitude()
+  // function longitude() {
+  //   if (userlocation) {
+  //     console.log(userlocation.coords.longitude)
+  //   }
+  // }
+  // longitude()
 
   let text = 'Waiting..';
   if (errorMsg) {
@@ -79,24 +78,22 @@ function HomeScreen({ navigation }) {
   //   const pokemon = await response.json();
   //   console.log(pokemon);
   // }
-
-  const address = '40 Division Street NY NY 10002'
+  const userAddress = '40 Division Street NY NY 10002'
   const radius = '8000'
   const YELP_API_KEY = 'gChaVU_NPBoWTsWwmuSwZ4AbrwCyPuBFw9hHIe3irRKszbN22YZGUgbAssxD-HE8VGFLnLbQhpqyEmKl45I2BcRKdr9FSQuCMOMFIu1uf3_mrPdHeUPeBxaJv5SKY3Yx'
 
   const getYelpRestaurants = async() => {
-    const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${address}&term=food, restaurants&radius=${radius}`
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=food, restaurants&radius=${radius}`
     const apiOptions = {
       headers: {
-        // "Access-Control-Allow-Origin": "*", (Didnt work)
         Authorization: `Bearer ${YELP_API_KEY}`,
-        crossorigin:true,
       },
     }
     return await fetch(yelpUrl, apiOptions)
-      .then((res) => res.json())
-      .then((json) =>
-      console.log(json)
+    .then((res) => res.json())
+    .then((json) =>
+    console.log(json),
+    console.log(userAddress),
         // setRestaurantData(
         //   json.businesses.filter((business) =>
         //     business.transactions.includes(activeTab.toLowerCase())
@@ -131,8 +128,8 @@ return (
     </View> :
       <View>
         <TextInput
-          placeholder='Name'
-          onChange={e => setName(e.target.value)}
+          placeholder='Address'
+          onChange={e => setAddress(e.target.value)}
         ></TextInput>
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
