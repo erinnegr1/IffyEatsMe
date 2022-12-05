@@ -8,8 +8,8 @@ function HomeScreen({ navigation }) {
 
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [name, setName] = useState('');
-  //const [userAddress, setAddress] = useState('')
+  // const [name, setName] = useState('');
+  const [userAddress, setUserAddress] = useState(null)
 
   console.log(YELP_API_KEY)
 
@@ -78,29 +78,49 @@ function HomeScreen({ navigation }) {
   //   const pokemon = await response.json();
   //   console.log(pokemon);
   // }
-  const userAddress = '40 Division Street NY NY 10002'
+  // const userAddress = '40 Division Street NY NY 10002'
   const radius = '8000'
+  // const YELP_API_KEY  = process.env
   const YELP_API_KEY = 'gChaVU_NPBoWTsWwmuSwZ4AbrwCyPuBFw9hHIe3irRKszbN22YZGUgbAssxD-HE8VGFLnLbQhpqyEmKl45I2BcRKdr9FSQuCMOMFIu1uf3_mrPdHeUPeBxaJv5SKY3Yx'
 
   const getYelpRestaurants = async() => {
-    const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=food, restaurants&radius=${radius}`
+    const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=food, restaurants&radius=${radius}&latitude=${userlocation.coords.latitude}&longitude=${userlocation.coords.longitude}`
     const apiOptions = {
       headers: {
-        Authorization: `Bearer ${YELP_API_KEY}`,
-      },
+        Authorization: `Bearer ${YELP_API_KEY}`
+
+      }
     }
     return await fetch(yelpUrl, apiOptions)
     .then((res) => res.json())
     .then((json) =>
-    console.log(json),
-    console.log(userAddress),
-        // setRestaurantData(
-        //   json.businesses.filter((business) =>
-        //     business.transactions.includes(activeTab.toLowerCase())
-          )
-      //   )
-      // );
-  };
+    // console.log(json),
+    {navigation.navigate('Object')
+      const foodPlace = json.businesses
+      // console.log(Object.keys(foodPlace))
+      let oneFoodPlace = Math.floor(Math.random(foodPlace) * foodPlace.length)
+      // console.log(oneFoodPlace)
+      console.log(foodPlace[oneFoodPlace].name)
+    }
+    // console.log(userlocation)
+    )
+};
+
+const inputedAddress = async () => {
+  const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=food, restaurants&radius=${radius}`
+  const apiOptions = {
+    headers: {
+      Authorization: `Bearer ${YELP_API_KEY}`,
+    },
+  }
+  console.log(userAdress);
+          return await fetch(yelpUrl, apiOptions)
+            .then((res) => res.json())
+            .then((json) =>
+              console.log(json),
+              console.log(userAddress),
+            )
+}
 
 return (
   <View style={styles.container}>
@@ -118,27 +138,30 @@ return (
         style={styles.input}
         keyboardType={'default'}
         placeholder={'Enter Address'}
+        onChange={(e) => setUserAddress(e.target.value)}
       ></TextInput>
 
       <Pressable
         style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+        onPress={inputedAddress}
       >
         <Text style={styles.btnText}>Enter Address</Text>
       </Pressable>
     </View> :
       <View>
-        <TextInput
+        {/* <TextInput
           placeholder='Address'
           onChange={e => setAddress(e.target.value)}
-        ></TextInput>
-        <Pressable
+        ></TextInput> */}
+        {/* <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={getYelpRestaurants}
         >
-        </Pressable>
+          <Text>Press</Text> */}
+        {/* </Pressable> */}
         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-          onPress={navToObject}
+          onPress={getYelpRestaurants}
         >
           <Text style={styles.btnText}>Click to feed your hangry!</Text>
         </Pressable>
