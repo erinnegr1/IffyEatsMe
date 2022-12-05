@@ -52,8 +52,7 @@ function HomeScreen({ navigation }) {
   // }
 
   const radius = '8000'
-  //const YELP_API_KEY = 'gChaVU_NPBoWTsWwmuSwZ4AbrwCyPuBFw9hHIe3irRKszbN22YZGUgbAssxD-HE8VGFLnLbQhpqyEmKl45I2BcRKdr9FSQuCMOMFIu1uf3_mrPdHeUPeBxaJv5SKY3Yx'
-
+  
   const getYelpRestaurants = async () => {
     if (userAddress) {
       const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=food, restaurants&radius=${radius}`
