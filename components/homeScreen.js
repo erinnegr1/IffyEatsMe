@@ -47,10 +47,6 @@ function HomeScreen({ navigation }) {
     text = JSON.stringify(userlocation);
   }
 
-  // const navToObject = () => {
-  //   navigation.navigate('Object')
-  // }
-
   const radius = '8000'
   
   const getYelpRestaurants = async () => {
@@ -67,15 +63,12 @@ function HomeScreen({ navigation }) {
         // console.log(json),
         {
           navigation.navigate('Object')
-          const foodPlace = json.businesses
+          const foodPlace = (json.businesses)
           // console.log(Object.keys(foodPlace))
           let oneFoodPlace = Math.floor(Math.random(foodPlace) * foodPlace.length)
           // console.log(oneFoodPlace)
           console.log(foodPlace[oneFoodPlace].name)
         }
-          // setRestaurantData(
-          //   json.businesses.filter((business) =>
-          //     business.transactions.includes(activeTab.toLowerCase())
         )
     } else {
       if (userlocation) {
@@ -91,7 +84,7 @@ function HomeScreen({ navigation }) {
           // console.log(json),
           {
             navigation.navigate('Object')
-            const foodPlace = json.businesses
+            const foodPlace = (json.businesses)
             // console.log(Object.keys(foodPlace))
             let oneFoodPlace = Math.floor(Math.random(foodPlace) * foodPlace.length)
             // console.log(oneFoodPlace)
@@ -142,6 +135,8 @@ function HomeScreen({ navigation }) {
   // useEffect(()=> {
   //   getYelpRestaurants()
   // },[])
+  console.log(userAddress);
+
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
@@ -181,7 +176,7 @@ function HomeScreen({ navigation }) {
           </Pressable> */}
           <Pressable
             style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-            onPress={navToObject}
+            onPress={getYelpRestaurants}
           >
             <Text style={styles.btnText}>Click to feed your hangry!</Text>
           </Pressable>
