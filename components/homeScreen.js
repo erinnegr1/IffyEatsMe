@@ -9,7 +9,7 @@ function HomeScreen({ navigation }) {
   const [userlocation, setUserLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   //const [name, setName] = useState('');
-  const [userAddress, setUserAddress] = useState(null)
+  const [userAddress, setUserAddress] = useState('');
 
   const onPressHandler = () => {
     (async () => {
@@ -71,9 +71,7 @@ function HomeScreen({ navigation }) {
   const YELP_API_KEY = 'gChaVU_NPBoWTsWwmuSwZ4AbrwCyPuBFw9hHIe3irRKszbN22YZGUgbAssxD-HE8VGFLnLbQhpqyEmKl45I2BcRKdr9FSQuCMOMFIu1uf3_mrPdHeUPeBxaJv5SKY3Yx'
 
   const getYelpRestaurants = async () => {
-    //await {userAddress}
-    // console.log(userAddress)
-    if (!userlocation) {
+    if (userAddress) {
       const yelpUrl = `https://api.yelp.com/v3/businesses/search?location=${userAddress}&term=food, restaurants&radius=${radius}`
       const apiOptions = {
         headers: {
@@ -83,18 +81,17 @@ function HomeScreen({ navigation }) {
               return await fetch(yelpUrl, apiOptions)
                 .then((res) => res.json())
                 .then((json) =>
-                console.log(userAddress),
-                  console.log(json),
+                console.log(json),
                   // setRestaurantData(
                   //   json.businesses.filter((business) =>
                   //     business.transactions.includes(activeTab.toLowerCase())
                 )
     } else {
+      if(userlocation) {
       const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=food, restaurants&radius=${radius}&latitude=${userlocation.coords.latitude}&longitude=${userlocation.coords.longitude}`
       const apiOptions = {
         headers: {
           Authorization: `Bearer ${YELP_API_KEY}`
-
         }
       }
       return await fetch(yelpUrl, apiOptions)
@@ -103,9 +100,7 @@ function HomeScreen({ navigation }) {
           console.log(json),
           console.log(userlocation),
         )
-    }
-
-
+    }}
   //   if (userlocation) {
   //     const yelpUrl = `https://api.yelp.com/v3/businesses/search?term=food, restaurants&radius=${radius}&latitude=${userlocation.coords.latitude}&longitude=${userlocation.coords.longitude}`
   //     const apiOptions = {
@@ -144,7 +139,9 @@ function HomeScreen({ navigation }) {
   //     }
   //   }
   };
-
+  // useEffect(()=> {
+  //   getYelpRestaurants()
+  // },[])
   return (
     <View style={styles.container}>
       <Image style={styles.img} source={require('../assets/Feed-Your-Hangry.png')} />
@@ -162,7 +159,7 @@ function HomeScreen({ navigation }) {
           keyboardType={'default'}
           placeholder={'Enter Address'}
           value ={userAddress}
-          onChange={(e) => setUserAddress(e.target.value)}
+          onChangeText={(e) => setUserAddress(e)}
         ></TextInput>
 
         <Pressable
@@ -170,7 +167,7 @@ function HomeScreen({ navigation }) {
           onPress={getYelpRestaurants}
         >
           <Text style={styles.btnText}>Enter Address</Text>
-        </Pressable>
+        </Pressable> 
       </View> :
         <View>
           {/* <TextInput
