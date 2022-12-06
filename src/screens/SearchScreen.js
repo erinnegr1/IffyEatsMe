@@ -1,24 +1,49 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useRestaurants';
 import RestaurantsList from '../components/Restlist';
+import * as Location from 'expo-location';
 
 
 const SearchScreen = () => {
     const [userAddress, setUserAddress] = useState('');
-    const [searchApi, restaurants] = useRestaurants();
-    
+    const [searchApi, restaurants] = useRestaurants('');
+   
+    const onPressHandler = () => {
+      (async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          alert('Please go to settings and allow location services');
+          console.log('Location permission denied');
+          return;
+        };
+  
+        let loc = await Location.getCurrentPositionAsync({});
+        console.log(loc)
+        setUserAddress(loc);
+      })();
+    };
+
+    const radius = '8000';
+ 
 
     return (
         <View style={styles.container}>
-        {/*<Image style={styles.img} source={require('../assets/pickyourfood.json')} />*/}
+        <Image style={styles.img} source={require('../assets/feedyourhangry.png')} />
         <Text style={styles.text}>Welcome to Iffy Eats!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
          onSearchSubmit={() => searchApi(userAddress)}
          />
+         
+          <Pressable
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+          onPress={onPressHandler}
+        ><Text>Use My Location Instead </Text>
+          </Pressable> 
          {/* <Text>We have found {restaurants.length} results</Text>
          <RestaurantsList title="You are going here:"/> */}
          </View>

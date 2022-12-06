@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import yelp from "../api/yelp";
+import * as Location from 'expo-location';
+
+
 
 export default () => {
     const [restaurants, setRestaurants]= useState([]);
@@ -9,12 +12,20 @@ export default () => {
         console.log('yo');
         console.log('searchapi', searchAddress)
         try {
-            const response = await yelp.get('/search', {
+            const response = await yelp.get('/search?', {
                 params: {
                     location: searchAddress,
-                }
+                    term: "restaurant",
+                    radius: 8000,
+                    
+                    
+                },
+              
             });
-            setRestaurants(response.data.business);
+            setRestaurants(response.data.businesses);
+            console.log('searchApi',response.data.businesses)
+            ///// Build in an else statement here that takes in the latitude and longitude as params
+
         } catch (err) {
             setErrorMessage('error in search API hook component')
 
@@ -26,4 +37,5 @@ export default () => {
         }, []);
 
         return [searchApi, restaurants, errorMessage]
+       
     };

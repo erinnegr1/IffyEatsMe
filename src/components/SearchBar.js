@@ -10,6 +10,7 @@ const SearchBar = ({userAddress, onSearchChange, onSearchSubmit}) => {
         autoCapitalize="none"
         autoCorrect={false}
         style={styles.inputStyle}
+        keyboardType={'default'}
         placeholder="Enter Your Address"
         value={userAddress}
         onChangeText={onSearchChange}
