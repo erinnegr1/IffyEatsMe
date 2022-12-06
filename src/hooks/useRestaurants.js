@@ -7,6 +7,7 @@ export default () => {
 
     const searchApi = async searchAddress => {
         console.log('yo');
+        console.log('searchapi', searchAddress)
         try {
             const response = await yelp.get('/search', {
                 params: {

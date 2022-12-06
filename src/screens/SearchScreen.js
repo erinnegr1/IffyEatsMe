@@ -16,8 +16,8 @@ const SearchScreen = () => {
         <Text style={styles.text}>Welcome to Iffy Eats!</Text>
         <SearchBar
          address = {userAddress}
-         onTermChange={setUserAddress}
-         onAddressSubmit={() => searchApi(userAddress)}
+         onSearchChange={setUserAddress}
+         onSearchSubmit={() => searchApi(userAddress)}
          />
          {/* <Text>We have found {restaurants.length} results</Text>
          <RestaurantsList title="You are going here:"/> */}
