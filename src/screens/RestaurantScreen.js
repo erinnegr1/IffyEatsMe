@@ -9,10 +9,8 @@ import * as Location from 'expo-location';
 import { NavigationHelpersContext } from '@react-navigation/native';
 
 
-const RestaurantScreen = ( { navigation }) => {
-    const [userAddress, setUserAddress] = useState('');
-    const [searchApi, restaurants] = useRestaurants('');
-
+const RestaurantScreen = ( { route, navigation }) => {
+   
 {/*}
 // Function to select restaurant at random
 //const foodPlace = (json.businesses)
@@ -23,11 +21,13 @@ const RestaurantScreen = ( { navigation }) => {
      return singleRestaurant
     } 
    */}
-    
+   const { state } = route.params;
+
+    console.log('RScreen', state)
     return (
         <View>
-        <Text>We have found {restaurants.length} results</Text>
-        <RestList restaurants={restaurants} title="Our Best Guess" />
+    
+        <RestList restaurants={state} title="Our Best Guess" />
       </View>
     );
 

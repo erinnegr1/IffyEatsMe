@@ -6,14 +6,14 @@ import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
 import RestList from '../components/Restaurant';
 import * as Location from 'expo-location';
-import { NavigationHelpersContext } from '@react-navigation/native';
+import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
 
 
-const SearchScreen = ( { navigation }) => {
+const SearchScreen = () => {
     const [userAddress, setUserAddress] = useState('');
     const [searchApi, restaurants] = useRestaurants('');
 
-    
+    const navigation = useNavigation();
 
     console.log('searchscreen', restaurants)
 
@@ -26,23 +26,27 @@ const SearchScreen = ( { navigation }) => {
          address = {userAddress}
          onSearchChange={setUserAddress}
          onSearchSubmit={() => {
-          searchApi(userAddress);
-          //navigation.navigate('Restaurant')
+          searchApi(userAddress, () => {
+            navigation.navigate("Restaurant", {state: restaurants})
+          })
+    
           }
          }
          />
+
+        {/*} navigation.navigate('Loading') -> Restaurant */}
          
          <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={() => {
             getCurrentLocation;
-            navigation.navigate('Restaurant')}
+            navigation.navigate('Restaurant', restaurants = {restaurants})}
           }
         ><Text>Use My Location Instead </Text>
         </Pressable>
           
           
-         <RestList restaurants={restaurants} title="You are going here:"/> 
+         {/*<RestList restaurants={restaurants} title="You are going here:"/> */}
          </View> 
 
          //navigation.navigate('Restaurant')
