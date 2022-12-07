@@ -7,7 +7,7 @@ import yelp from '../api/yelp';
 import RestList from '../components/Restaurant';
 import * as Location from 'expo-location';
 import { NavigationHelpersContext } from '@react-navigation/native';
-
+import MapScreen from './MapScreen';
 
 const RestaurantScreen = ( { route, navigation }) => {
    
@@ -23,13 +23,23 @@ const RestaurantScreen = ( { route, navigation }) => {
    */}
    const { state } = route.params;
 
-    console.log('RScreen', state)
-    return (
-        <View>
-    
-        <RestList restaurants={state} title="Our Best Guess" />
-      </View>
-    );
+   console.log('RScreen', state)
+   return (
+     <View>
+     <RestList restaurants={state} title="Our Best Guess" />
+    {/*} <Pressable
+       style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+       onPress={() => {
+        
+         navigation.navigate( 'Map', {address: userAddress})}
+       }
+        ><Text>View On Map</Text>
+      </Pressable> */}
+   </View>
+ );
+
+ const styles = StyleSheet.create({
+ });
 
 }
 
