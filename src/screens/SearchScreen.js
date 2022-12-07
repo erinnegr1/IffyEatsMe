@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
-import useRestaurants from '../hooks/useRestaurants';
+import useRestaurants from '../hooks/useAddress';
+import yelp from '../api/yelp';
 import RestaurantsList from '../components/Restlist';
 import * as Location from 'expo-location';
 
@@ -9,8 +10,8 @@ import * as Location from 'expo-location';
 const SearchScreen = () => {
     const [userAddress, setUserAddress] = useState('');
     const [searchApi, restaurants] = useRestaurants('');
-   
-    const onPressHandler = () => {
+
+    const getCurrentLocation = () => {
       (async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status !== 'granted') {
@@ -26,7 +27,7 @@ const SearchScreen = () => {
       })();
     };
 
-    const radius = '8000';
+   
  
 
     return (
@@ -39,13 +40,13 @@ const SearchScreen = () => {
          onSearchSubmit={() => searchApi(userAddress)}
          />
          
-          <Pressable
+         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-          onPress={onPressHandler}
+          onPress={getCurrentLocation}
         ><Text>Use My Location Instead </Text>
-          </Pressable> 
-         {/* <Text>We have found {restaurants.length} results</Text>
-         <RestaurantsList title="You are going here:"/> */}
+        </Pressable>
+          <Text>We have found {restaurants.length} results</Text>
+         {/*<RestaurantsList title="You are going here:"/> */}
          </View>
     );
 };

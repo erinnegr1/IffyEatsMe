@@ -5,18 +5,20 @@ import * as Location from 'expo-location';
 
 
 export default () => {
-    const [restaurants, setRestaurants]= useState([]);
+    const [userAddress, setUserAddress] = useState('');
+    const [restaurants, setRestaurants] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
 
     const searchApi = async searchAddress => {
         console.log('yo');
         console.log('searchapi', searchAddress)
         try {
-            const response = await yelp.get('/search?', {
+            const response = await yelp.get('/search', {
                 params: {
                     location: searchAddress,
                     term: "restaurant",
                     radius: 8000,
+                    limit: 10,
                     
                     
                 },
@@ -36,6 +38,7 @@ export default () => {
             searchApi("NYC");
         }, []);
 
-        return [searchApi, restaurants, errorMessage]
+    return [searchApi, restaurants, errorMessage]
        
-    };
+    }; 
+

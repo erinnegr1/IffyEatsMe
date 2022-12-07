@@ -13,8 +13,8 @@ const SearchBar = ({userAddress, onSearchChange, onSearchSubmit}) => {
         keyboardType={'default'}
         placeholder="Enter Your Address"
         value={userAddress}
-        onChangeText={onSearchChange}
-        onEndEditing={onSearchSubmit}
+        onChangeText={newAddress => onSearchChange(newAddress)}
+        onEndEditing={() => onSearchSubmit()}
       />
     </View>
   );
