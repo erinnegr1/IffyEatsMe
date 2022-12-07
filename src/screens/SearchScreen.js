@@ -20,7 +20,7 @@ const SearchScreen = () => {
      } else {
       navigation.navigate("Restaurant", {state: restaurants})
      }
-   }, [restaurants]);
+   }, [restaurants]);     
 
     const navigation = useNavigation();
 
