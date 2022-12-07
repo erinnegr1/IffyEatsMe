@@ -31,10 +31,10 @@ export default () => {
 
         };
         
-        {/*
+        
         useEffect(() => {
             searchApi("NYC");
-        }, []); */}
+        }, []); 
 
     return [searchApi, restaurants, errorMessage]
        

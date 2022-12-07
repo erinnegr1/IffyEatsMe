@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useAddress';
 import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
-import RestList from '../components/RestList';
+import RestList from '../components/Restaurant';
 import * as Location from 'expo-location';
 import { NavigationHelpersContext } from '@react-navigation/native';
 

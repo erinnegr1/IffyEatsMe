@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-import RestDetails from './RestDetails'
+import RestDetails from './RestaurantAttributes'
 
 
 const RestList =  ({ restaurants }) => {
