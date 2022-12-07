@@ -4,10 +4,10 @@ import * as Location from "expo-location";
 
 export default () => {
   // const [userAddress, setUserAddress] = useState('');
-  const [restaurants, setRestaurants] = useState([]);
+  
   const [errorMessage, setErrorMessage] = useState("");
 
-  const searchApi = async (searchAddress, callback) => {
+  const searchApi = async (searchAddress, setRestaurants) => {
     console.log("searchapi", searchAddress);
 
     try {
@@ -20,9 +20,9 @@ export default () => {
           open_now: true,
         },
       });
-      callback(response);
+      
       setRestaurants(response.data.businesses);
-      console.log(restaurants);
+      console.log(response.data.businesses);
       ///// Build in an else statement here that takes in the latitude and longitude as params
     } catch (e) {
       console.log(e);
@@ -33,5 +33,5 @@ export default () => {
     searchApi("NYC");
   }, []);
 
-  return [searchApi, restaurants, errorMessage];
+  return [searchApi, errorMessage];
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useAddress';
@@ -11,7 +11,16 @@ import { NavigationHelpersContext, useNavigation } from '@react-navigation/nativ
 
 const SearchScreen = () => {
     const [userAddress, setUserAddress] = useState('');
-    const [searchApi, restaurants] = useRestaurants('');
+    const [searchApi] = useRestaurants('');
+    const [restaurants, setRestaurants] = useState([]);
+    
+   useEffect(() => {
+     if (restaurants.length===0) {
+      return;
+     } else {
+      navigation.navigate("Restaurant", {state: restaurants})
+     }
+   }, [restaurants]);
 
     const navigation = useNavigation();
 
@@ -26,10 +35,7 @@ const SearchScreen = () => {
          address = {userAddress}
          onSearchChange={setUserAddress}
          onSearchSubmit={() => {
-          searchApi(userAddress, () => {
-            navigation.navigate("Restaurant", {state: restaurants})
-          })
-    
+          searchApi(userAddress, setRestaurants)
           }
          }
          />
