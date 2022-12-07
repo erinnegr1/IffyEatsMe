@@ -22,15 +22,15 @@ const RestaurantScreen = ( { navigation }) => {
      let singleRestaurant = Math.floor(Math.random(restaurants) * restaurants.length)
      return singleRestaurant
     } 
-   
+   */}
     
     return (
         <View>
         <Text>We have found {restaurants.length} results</Text>
-        <RestList restaurants={randomSelector()} title="Our Best Guess" />
+        <RestList restaurants={restaurants} title="Our Best Guess" />
       </View>
     );
-*/}
+
 }
 
 export default RestaurantScreen
