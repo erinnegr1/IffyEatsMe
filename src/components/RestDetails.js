@@ -8,6 +8,9 @@ const RestDetails = ({restaurant}) => {
       <View>
         <Text>{restaurant.name}</Text>
         <Image style={styles.image} source={{uri: restaurant.image_url}} /> 
+        <Text>
+        {restaurant.rating} Stars, {restaurant.review_count} Reviews
+      </Text>
       </View>
     )
     
