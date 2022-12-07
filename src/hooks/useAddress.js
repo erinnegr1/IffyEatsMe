@@ -10,7 +10,7 @@ export default () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const searchApi = async searchAddress => {
-        console.log('yo');
+    
         console.log('searchapi', searchAddress)
         
     
@@ -19,14 +19,14 @@ export default () => {
                     location: searchAddress,
                     term: 'restaurants',
                     radius: 3000,
-                    limit: 10,
+                    limit: 2,
                     open_now: true,
                     
                 },
               
             });
             setRestaurants(response.data.businesses);
-            console.log('searchApi',response.data)
+            console.log(restaurants)
             ///// Build in an else statement here that takes in the latitude and longitude as params
 
         };

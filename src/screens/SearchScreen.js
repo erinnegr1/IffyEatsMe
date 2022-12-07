@@ -4,37 +4,49 @@ import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useAddress';
 import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
-import RestaurantsList from '../components/Restlist';
+import RestList from '../components/RestList';
 import * as Location from 'expo-location';
+import { NavigationHelpersContext } from '@react-navigation/native';
 
 
-const SearchScreen = () => {
+const SearchScreen = ( { navigation }) => {
     const [userAddress, setUserAddress] = useState('');
     const [searchApi, restaurants] = useRestaurants('');
 
     
 
-  
+    console.log('searchscreen', restaurants)
 
     return (
+ 
         <View style={styles.container}>
         <Image style={styles.img} source={require('../assets/feedyourhangry.png')} />
         <Text style={styles.text}>Welcome to Iffy Eats!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
-         onSearchSubmit={() => searchApi(userAddress)}
+         onSearchSubmit={() => {
+          searchApi(userAddress);
+          //navigation.navigate('Restaurant')
+          }
+         }
          />
          
          <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
-          onPress={getCurrentLocation}
+          onPress={() => {
+            getCurrentLocation;
+            navigation.navigate('Restaurant')}
+          }
         ><Text>Use My Location Instead </Text>
         </Pressable>
-      
-         {/*<RestaurantsList title="You are going here:"/> */}
-         </View>
-    );
+          
+          
+         <RestList restaurants={restaurants} title="You are going here:"/> 
+         </View> 
+
+         //navigation.navigate('Restaurant')
+    )
 };
 
 const styles = StyleSheet.create({
@@ -43,10 +55,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        
       },
       img: {
-        height: 300,
-        width: 300,
+        height: 200,
+        width: 200,
         margin: 30,
       },
 });

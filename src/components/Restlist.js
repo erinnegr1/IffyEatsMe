@@ -1,19 +1,29 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
+import RestDetails from './RestDetails'
 
-const RestaurantList =  ({ restaurants }) => {
+
+const RestList =  ({ restaurants }) => {
+
+    console.log("restaurantList", restaurants)
     return (
         <View>
             <FlatList
-            horizontal
             data = {restaurants} 
             keyExtractor = {restaurant => restaurant.id}
-            renderEach={({item}) => {
+            renderItem={({item}) => {
                 return <RestDetails restaurant={item} />
             }}
             />
         </View>
-    )
-}
+    );
+};
 
-export default RestaurantList
+const styles = StyleSheet.create({
+    title: {
+      fontSize: 18,
+      fontWeight: 'bold'
+    }
+  });
+
+export default RestList
