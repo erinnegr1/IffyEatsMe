@@ -12,24 +12,24 @@ export default () => {
     const searchApi = async searchAddress => {
         console.log('yo');
         console.log('searchapi', searchAddress)
-        try {
+        
+       try {
             const response = await yelp.get('/search', {
                 params: {
                     location: searchAddress,
-                    term: "restaurant",
+                    term: 'restaurants',
                     radius: 8000,
                     limit: 10,
-                    
                     
                 },
               
             });
             setRestaurants(response.data.businesses);
-            console.log('searchApi',response.data.businesses)
+            console.log('searchApi',response.data)
             ///// Build in an else statement here that takes in the latitude and longitude as params
 
-        } catch (err) {
-            setErrorMessage('error in search API hook component')
+       } catch (error) {
+         setErrorMessage('error in search API hook component')
 
         }
         };
