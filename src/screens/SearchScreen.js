@@ -4,7 +4,7 @@ import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useAddress';
 import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
-import RestList from '../components/Restaurant';
+//import RestList from '../components/Restaurant';
 import * as Location from 'expo-location';
 import { NavigationHelpersContext, useNavigation } from '@react-navigation/native';
 
@@ -42,14 +42,14 @@ const SearchScreen = () => {
 
         {/*} navigation.navigate('Loading') -> Restaurant */}
          
-         <Pressable
+         {/*<Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={() => {
             getCurrentLocation;
             navigation.navigate('Restaurant', restaurants = {restaurants})}
           }
         ><Text>Use My Location Instead </Text>
-        </Pressable>
+        </Pressable> */}
           
           
          {/*<RestList restaurants={restaurants} title="You are going here:"/> */}
