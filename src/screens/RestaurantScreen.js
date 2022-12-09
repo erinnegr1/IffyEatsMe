@@ -22,25 +22,30 @@ const RestaurantScreen = ( { route, navigation }) => {
    }, [restaurants]);     
    
 {/*}
-// Function to select restaurant at random
-//const foodPlace = (json.businesses)
-//let oneFoodPlace = Math.floor(Math.random(foodPlace) * foodPlace.length)
-   const randomSelector = () => {
-     let restaurants;
-     let singleRestaurant = Math.floor(Math.random(restaurants) * restaurants.length)
-     return singleRestaurant
-    } 
-   */}
-   const { state } = route.params;
-
-   let random_index = Math.floor(Math.random() * state.length)
+ let random_index = Math.floor(Math.random() * state.length)
    let oneFoodObject = state[random_index]
 
+   */}
+   const { state } = route.params;
+  console.log('state', state)
+  
+  
+   const filterByPrice = price => {
+    return state.filter(item => {
+      console.log(item.price)
+      return item.price === price;
+    });
+   }; 
+  
+  
 
    console.log('RScreen', state)
    return (
      <View>
-     <RestList restaurants={oneFoodObject} title="Our Best Guess" />
+     <RestList restaurants={filterByPrice('$')} title="Dirty Kitchen" />
+     <RestList restaurants={filterByPrice('$$')} title="Middle of the Road" />
+     <RestList restaurants={filterByPrice('$$$')} title="You Fancy" />
+     <RestList restaurants={filterByPrice('$$$$')} title="So you want to be a billionaire" />
      <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}

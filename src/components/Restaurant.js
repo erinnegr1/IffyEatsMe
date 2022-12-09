@@ -5,10 +5,11 @@ import RestDetails from './RestaurantAttributes'
 
 const RestList =  ({ restaurants }) => {
 
-    console.log("restaurantList", restaurants)
+    
     return (
         <View>
             <FlatList
+            horizontal
             data = {restaurants} 
             keyExtractor = {restaurant => restaurant.id}
             renderItem={({item}) => {

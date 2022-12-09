@@ -17,7 +17,7 @@ export default () => {
           location: searchAddress,
           term: "restaurants",
           radius: 3000,
-          limit: 2,
+          limit: 1,
           open_now: true,
         },
       });
