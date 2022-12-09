@@ -11,7 +11,7 @@ const SearchBar = ({userAddress, onSearchChange, onSearchSubmit}) => {
         autoCorrect={false}
         style={styles.inputStyle}
         keyboardType={'default'}
-        placeholder="740 Park Avenue New York"
+        placeholder="Enter your Address"
         value={userAddress}
         onChangeText={newAddress => onSearchChange(newAddress)}
         onEndEditing={() => onSearchSubmit()}

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native'
 import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
-import useRestaurants from '../hooks/useAddress';
-import getCurrentLocation from '../hooks/useLocation';
+import useAddress from '../hooks/useAddress';
+import useLocation from '../hooks/askLocation'
+//import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
 //import RestList from '../components/Restaurant';
 import * as Location from 'expo-location';
@@ -12,7 +13,8 @@ import { NavigationHelpersContext, useNavigation } from '@react-navigation/nativ
 
 const SearchScreen = () => {
     const [userAddress, setUserAddress] = useState('');
-    const [searchApi] = useRestaurants('');
+    const [searchApi] = useAddress('');
+    const [getCurrentLocation] = useLocation({})
     const [restaurants, setRestaurants] = useState([]);
     
    useEffect(() => {
@@ -51,11 +53,10 @@ const SearchScreen = () => {
         {/*} navigation.navigate('Loading') -> Restaurant */}
          
          <Pressable
-          style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
+          style={({ pressed }) => [({ backgroundColor: pressed ? 'teal' : 'teal' }), styles.wrapperCustom]}
           onPress={() => {
             getCurrentLocation;
-            navigation.navigate('Restaurant', restaurants = {restaurants})}
-          }
+          }}
         ><Text>Use My Location Instead </Text>
         </Pressable> 
           

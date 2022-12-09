@@ -2,10 +2,11 @@ import * as Location from 'expo-location';
 import { useState } from "react";
 
 
-{/*
+
 const getCurrentLocation = () => {
  
 const [userLocation, setUserLocation] = useState('');
+const [errorMsg, setErrorMsg] = useState("");
 
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -17,12 +18,22 @@ const [userLocation, setUserLocation] = useState('');
       };
 
       let loc = await Location.getCurrentPositionAsync({});
-      console.log(loc)
+      
       setUserLocation(loc);
+      console.log('useLocation', userLocation)
     })();
+    
+    
+
+
+
+
+
+
+
   };
    
-export default getCurrentLocation; */}
+export default getCurrentLocation; 
 
 
  
