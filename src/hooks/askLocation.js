@@ -1,39 +1,34 @@
-import * as Location from 'expo-location';
-import { useState } from "react";
+import * as Location from "expo-location";
+import { useState, useEffect } from "react";
 
-
-
+{/*}
 const getCurrentLocation = () => {
- 
-const [userLocation, setUserLocation] = useState('');
-const [errorMsg, setErrorMsg] = useState("");
+  const [userLocation, setUserLocation] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
+  useEffect(() => {
     (async () => {
+      
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
-        alert('Please go to settings and allow location services');
-        console.log('Location permission denied');
         return;
-      };
+      }
 
-      let loc = await Location.getCurrentPositionAsync({});
-      
-      setUserLocation(loc);
-      console.log('useLocation', userLocation)
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
     })();
-    
-    
+  }, []);
+
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+}
+
+export default getCurrentLocation;
 
 
-
-
-
-
-
-  };
-   
-export default getCurrentLocation; 
-
-
- 
+*/}

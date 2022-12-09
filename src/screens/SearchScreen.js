@@ -3,7 +3,7 @@ import LottieView from 'lottie-react-native'
 import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useAddress from '../hooks/useAddress';
-import useLocation from '../hooks/askLocation'
+//import askLocation from '../hooks/askLocation'
 //import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
 //import RestList from '../components/Restaurant';
@@ -14,7 +14,7 @@ import { NavigationHelpersContext, useNavigation } from '@react-navigation/nativ
 const SearchScreen = () => {
     const [userAddress, setUserAddress] = useState('');
     const [searchApi] = useAddress('');
-    const [getCurrentLocation] = useLocation({})
+    //const [getCurrentLocation] = askLocation()
     const [restaurants, setRestaurants] = useState([]);
     
    useEffect(() => {
@@ -55,7 +55,7 @@ const SearchScreen = () => {
          <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'teal' : 'teal' }), styles.wrapperCustom]}
           onPress={() => {
-            getCurrentLocation;
+            //getCurrentLocation;
           }}
         ><Text>Use My Location Instead </Text>
         </Pressable> 
