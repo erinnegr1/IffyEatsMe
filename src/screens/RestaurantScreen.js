@@ -33,6 +33,9 @@ const RestaurantScreen = ( { route, navigation }) => {
    */}
    const { state } = route.params;
 
+   //let oneFoodPlace = Math.floor(Math.random(state) * state.length)
+   // i want to use a randomizer here
+
    console.log('RScreen', state)
    return (
      <View>
