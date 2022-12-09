@@ -6,7 +6,7 @@ const RestDetails = ({restaurant}) => {
 
     return (
       <View>
-        <Text> hi</Text>
+        <Text> Our Pick for you is... </Text>
         <Text>{restaurant.name}</Text>
         <Image style={styles.image} source={{uri: restaurant.image_url}} /> 
         <Text>

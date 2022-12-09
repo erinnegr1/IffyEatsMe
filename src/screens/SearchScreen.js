@@ -35,10 +35,10 @@ const SearchScreen = () => {
           autoPlay
           loop
           resizeMode="cover"
-          source={require("../assets/watermelon.json")}
+          source={require("../assets/order-food.json")}
           />
         {/*<Image style={styles.img} source={require('../assets/feedyourhangry.png')} />*/}
-        <Text style={styles.text}>Welcome to Iffy Eats!</Text>
+        <Text style={styles.text}>Feed your Hangry now!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
@@ -50,14 +50,14 @@ const SearchScreen = () => {
 
         {/*} navigation.navigate('Loading') -> Restaurant */}
          
-         {/*<Pressable
+         <Pressable
           style={({ pressed }) => [({ backgroundColor: pressed ? 'purple' : 'hotpink' }), styles.wrapperCustom]}
           onPress={() => {
             getCurrentLocation;
             navigation.navigate('Restaurant', restaurants = {restaurants})}
           }
         ><Text>Use My Location Instead </Text>
-        </Pressable> */}
+        </Pressable> 
           
           
          {/*<RestList restaurants={restaurants} title="You are going here:"/> */}
