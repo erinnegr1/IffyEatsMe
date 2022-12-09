@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import LottieView from 'lottie-react-native'
 import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useAddress';
@@ -29,7 +30,14 @@ const SearchScreen = () => {
     return (
  
         <View style={styles.container}>
-        <Image style={styles.img} source={require('../assets/feedyourhangry.png')} />
+          <LottieView
+          key="animation"
+          autoPlay
+          loop
+          resizeMode="cover"
+          source={require("../assets/watermelon.json")}
+          />
+        {/*<Image style={styles.img} source={require('../assets/feedyourhangry.png')} />*/}
         <Text style={styles.text}>Welcome to Iffy Eats!</Text>
         <SearchBar
          address = {userAddress}
