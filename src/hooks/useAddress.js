@@ -6,11 +6,12 @@ export default () => {
   // const [userAddress, setUserAddress] = useState('');
   
   const [errorMessage, setErrorMessage] = useState("");
+  
 
   const searchApi = async (searchAddress, setRestaurants) => {
     console.log("searchapi", searchAddress);
 
-   
+   try {
       const response = await yelp.get("/search", {
         params: {
           location: searchAddress,
@@ -24,7 +25,9 @@ export default () => {
       setRestaurants(response.data.businesses);
       console.log(response.data.businesses);
       //////////// Build in an else statement here that takes in the latitude and longitude as params
-    
+   } catch(error) {
+    console.log(error)
+   }
   };
  {/*}
   useEffect(() => {

@@ -33,10 +33,14 @@ const RestaurantScreen = ( { route, navigation }) => {
    */}
    const { state } = route.params;
 
+   let random_index = Math.floor(Math.random() * state.length)
+   let oneFoodObject = state[random_index]
+
+
    console.log('RScreen', state)
    return (
      <View>
-     <RestList restaurants={state} title="Our Best Guess" />
+     <RestList restaurants={oneFoodObject} title="Our Best Guess" />
      <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
