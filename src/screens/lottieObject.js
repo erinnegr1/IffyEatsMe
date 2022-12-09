@@ -3,7 +3,7 @@ import { Animated, Easing, View, StyleSheet, Text } from 'react-native';
 import Lottie from 'lottie-react-native'; //LottieView
 import { StatusBar } from 'expo-status-bar';
 
-const Object = () => {
+{/*const Object = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Our Pick for You Is...</Text>
@@ -34,4 +34,4 @@ const styles = StyleSheet.create(
         }
     }
 )
-export default Object
+export default Object */}
