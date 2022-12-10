@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native'
-import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
+import { Image, View, Text, TextInput, StyleSheet, Pressable, SafeAreaView, TouchableOpacity } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useAddress from '../hooks/useAddress';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 //import askLocation from '../hooks/askLocation'
 //import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
@@ -30,17 +31,10 @@ const SearchScreen = () => {
     console.log('searchscreen', restaurants)
 
     return (
- 
+      <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
         <View style={styles.container}>
-          <LottieView
-          key="animation"
-          autoPlay
-          loop
-          resizeMode="cover"
-          source={require("../assets/order-food.json")}
-          />
-        {/*<Image style={styles.img} source={require('../assets/feedyourhangry.png')} />*/}
-        <Text style={styles.text}>Feed your Hangry now!</Text>
+        <View style={styles.inputContainer}>
+        <Text style={styles.text}>We'll feed you!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
@@ -49,31 +43,46 @@ const SearchScreen = () => {
           }
          }
          />
-
-        {/*} navigation.navigate('Loading') -> Restaurant */}
          
-         <Pressable
-          style={({ pressed }) => [({ backgroundColor: pressed ? 'teal' : 'teal' }), styles.wrapperCustom]}
+         <TouchableOpacity
+          style={styles.button}
           onPress={() => {
-            //getCurrentLocation;
+            //getCurrentLocation;git
           }}
-        ><Text>Use My Location Instead </Text>
-        </Pressable> 
-          
-          
-         {/*<RestList restaurants={restaurants} title="You are going here:"/> */}
+        ><Text>Use My Location </Text>
+        </TouchableOpacity> 
+         
          </View> 
-
-         //navigation.navigate('Restaurant')
+         <View style={{height: 400, width:450}}>
+         <LottieView
+          key="animation"
+          autoPlay
+          loop
+          resizeMode="cover"
+          source={require("../assets/order-food.json")}
+           /> 
+           </View>
+          </View>
+        
+        </KeyboardAwareScrollView>
+         
     )
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
+    inputContainer: {
+
         alignItems: 'center',
-        justifyContent: 'center',
+        padding:9,
+        marginTop: 100,
+        marginHorizontal: 24,
+        backgroundColor: '#68b8c1',
+        borderRadius: 8,
+        elevation: 4,
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 4 },
+        shadowRadius: 6,
+        shadowOpacity:0.25,
         
       },
       img: {
@@ -81,6 +90,29 @@ const styles = StyleSheet.create({
         width: 200,
         margin: 30,
       },
+      button: {
+        
+        backgroundColor: '#fa7e3e',
+        borderRadius:8,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        elevation: 2,
+        marginTop: 10,
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 4 },
+        shadowRadius: 6,
+        shadowOpacity:0.25,
+
+
+      },
+      container: {
+        
+        backgroundColor: '#cfe3e6',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+     
+      
 });
 
 export default SearchScreen;
