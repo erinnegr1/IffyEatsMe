@@ -24,7 +24,7 @@ const RestDetails = ({restaurant}) => {
 
    
   const staticMapConstructor = (lat,long) => {
-    const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${long}&zoom=13&size=400x200&maptype=roadmap
+    const mapImageURL = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${long}&zoom=16&size=400x200&maptype=roadmap
    &markers=markers=icon:http%3A%2F%2Ftinyurl.com%2F2ftvtt6|${lat},${long}
    &key=${GOOGLE_API_KEY}`;
 

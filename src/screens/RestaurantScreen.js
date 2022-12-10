@@ -29,15 +29,22 @@ const RestaurantScreen = ( { route, navigation }) => {
    const { state } = route.params;
   console.log('state', state)
   
-  
-   const filterByPrice = price => {
+  {/*}
+   const randomPicker = item => {
+    return state.map(item => {
+      console.log(item)
+      return item
+    });
+   }; 
+  */}
+
+  const filterByPrice = price => {
     return state.filter(item => {
       console.log(item.price)
       return item.price === price;
     });
    }; 
-  
-  
+
 
    console.log('RScreen', state)
    return (
