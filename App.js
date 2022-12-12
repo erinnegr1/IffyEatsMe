@@ -13,7 +13,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-      <Stack.Screen name="IffyEats" component={SearchScreen} />
+      <Stack.Screen name="Universe" component={SearchScreen} />
       <Stack.Screen name="Restaurant" component={RestaurantScreen} />
       
       {/*<Stack.Screen name='Iffy Eats' component={HomeScreen} /> *}

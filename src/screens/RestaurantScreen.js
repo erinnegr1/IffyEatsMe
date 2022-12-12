@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Image, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
+import { Image, ImageBackground, View, Text, TextInput, StyleSheet, Pressable } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useRestaurants from '../hooks/useAddress';
 import RestList from '../components/Restaurant';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 //import * as Location from 'expo-location';
 import { NavigationHelpersContext } from '@react-navigation/native';
 //import MapScreen from './MapScreen';
@@ -48,6 +49,8 @@ const RestaurantScreen = ( { route, navigation }) => {
 
    console.log('RScreen', state)
    return (
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+       <ImageBackground source={require("../assets/galaxy.jpg")} resizeMode="cover" style={styles.backgroundImage}>
      <View>
      <RestList restaurants={filterByPrice('$')} title="Dirty Kitchen" />
      <RestList restaurants={filterByPrice('$$')} title="Middle of the Road" />
@@ -62,11 +65,18 @@ const RestaurantScreen = ( { route, navigation }) => {
          }
          />
    </View>
+   </ImageBackground>
+   </KeyboardAwareScrollView>
  );
+}
 
  const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    justifyContent: "center"
+  }
  });
 
-}
+
 
 export default RestaurantScreen

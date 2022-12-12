@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native'
-import { Image, View, Text, TextInput, StyleSheet, Pressable, SafeAreaView, TouchableOpacity } from 'react-native';
+import { ImageBackground, View, Text, TextInput, StyleSheet, Pressable, SafeAreaView, TouchableOpacity } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useAddress from '../hooks/useAddress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -32,9 +32,10 @@ const SearchScreen = () => {
 
     return (
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+         <ImageBackground source={require("../assets/galaxy.jpg")} resizeMode="cover" style={styles.backgroundImage}>
         <View style={styles.container}>
         <View style={styles.inputContainer}>
-        <Text style={styles.text}>We'll feed you!</Text>
+        <Text style={{color:'white'}}>Can't decide? Ask the Oracle!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
@@ -49,7 +50,7 @@ const SearchScreen = () => {
           onPress={() => {
             //getCurrentLocation;git
           }}
-        ><Text>Use My Location </Text>
+        ><Text style={{color:'white'}}>Use My Location </Text>
         </TouchableOpacity> 
          
          </View> 
@@ -59,11 +60,11 @@ const SearchScreen = () => {
           autoPlay
           loop
           resizeMode="cover"
-          source={require("../assets/order-food.json")}
+          source={require("../assets/donutStar.json")}
            /> 
            </View>
           </View>
-        
+          </ImageBackground>
         </KeyboardAwareScrollView>
          
     )
@@ -71,16 +72,16 @@ const SearchScreen = () => {
 
 const styles = StyleSheet.create({
     inputContainer: {
-
+        font: 'white',
         alignItems: 'center',
         padding:9,
         marginTop: 100,
         marginHorizontal: 24,
-        backgroundColor: '#68b8c1',
+        backgroundColor: '#26007B',
         borderRadius: 8,
         elevation: 4,
-        shadowColor: 'black',
-        shadowOffset: {width: 0, height: 4 },
+        shadowColor: 'white',
+        shadowOffset: {width: 4, height: 6 },
         shadowRadius: 6,
         shadowOpacity:0.25,
         
@@ -92,13 +93,13 @@ const styles = StyleSheet.create({
       },
       button: {
         
-        backgroundColor: '#fa7e3e',
+        backgroundColor: '#7A00B2',
         borderRadius:8,
         paddingVertical: 8,
         paddingHorizontal: 16,
         elevation: 2,
         marginTop: 10,
-        shadowColor: 'black',
+        shadowColor: 'white',
         shadowOffset: {width: 0, height: 4 },
         shadowRadius: 6,
         shadowOpacity:0.25,
@@ -107,10 +108,14 @@ const styles = StyleSheet.create({
       },
       container: {
         
-        backgroundColor: '#cfe3e6',
+       
         alignItems: 'center',
         justifyContent: 'center',
       },
+      backgroundImage: {
+        flex: 1,
+        justifyContent: "center"
+      }
      
       
 });

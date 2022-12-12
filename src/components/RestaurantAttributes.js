@@ -34,7 +34,7 @@ const RestDetails = ({restaurant}) => {
 
     return (
       <View>
-        <Text> Our Pick for you is... </Text>
+        <Text> It was written in the stars... </Text>
         <Text>{restaurant.name}</Text>
         <Image style={styles.image} source={{uri: restaurant.image_url}} /> 
         <Text>
