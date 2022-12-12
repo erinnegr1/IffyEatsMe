@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import LottieView from 'lottie-react-native'
-import { Image, View, Text, TextInput, StyleSheet, Pressable, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Image, View, Text, TextInput, StyleSheet, Pressable, SafeAreaView, TouchableOpacity, ImageBackground } from 'react-native';
 import SearchBar from '../components/SearchBar';
 import useAddress from '../hooks/useAddress';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { LinearGradient } from 'expo-linear-gradient';
 //import askLocation from '../hooks/askLocation'
 //import getCurrentLocation from '../hooks/useLocation';
 import yelp from '../api/yelp';
@@ -32,6 +33,7 @@ const SearchScreen = () => {
 
     return (
       <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+        <LinearGradient colors={['#cfe3e6','#68b8c1']} style={styles.container}>
         <View style={styles.container}>
         <View style={styles.inputContainer}>
         <Text style={styles.text}>We'll feed you!</Text>
@@ -63,7 +65,7 @@ const SearchScreen = () => {
            /> 
            </View>
           </View>
-        
+          </LinearGradient>
         </KeyboardAwareScrollView>
          
     )
@@ -106,10 +108,9 @@ const styles = StyleSheet.create({
 
       },
       container: {
-        
-        backgroundColor: '#cfe3e6',
         alignItems: 'center',
         justifyContent: 'center',
+        flex: 1,
       },
      
       

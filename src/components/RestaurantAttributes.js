@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {View, Image, Text, StyleSheet, Linking} from 'react-native';
 import { GOOGLE_API_KEY} from '@env';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { LinearGradient } from 'expo-linear-gradient';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 
 const RestDetails = ({restaurant}) => {
@@ -33,34 +36,76 @@ const RestDetails = ({restaurant}) => {
   } 
 
     return (
-      <View>
-        <Text> Our Pick for you is... </Text>
-        <Text>{restaurant.name}</Text>
+      
+      <View style={styles.container}>
+        <Text style= {styles.title}> The Oracle knows... </Text>
+        <View style={styles.foodplace}>
+        <Text style={styles.name}>{restaurant.name} </Text>
         <Image style={styles.image} source={{uri: restaurant.image_url}} /> 
-        <Text>
-        {restaurant.rating} Stars, {restaurant.review_count} Reviews
+        <View style={styles.lineItems}>
+        <Text >
+        {restaurant.rating} Stars |  {restaurant.review_count} Reviews | {restaurant.price}
       </Text>
       <Text style={{color: 'teal'}}
             onPress={() => Linking.openURL(restaurant.url)}>
             View Menu
       </Text>
+      </View>
+      </View>
+      <View style={styles.mapBox}>
       <Image 
-          style={{width: 400, height: 200}}
+          style={styles.map}
           source={{uri: staticMapConstructor(coords.lat, coords.long)
       }} />
       </View>
+      </View>
+      
     )
     
 }}
 
 const styles = StyleSheet.create({
     image: {
-      width: 250,
-      height: 120,
+      width: 340,
+      height: 200,
       borderRadius: 4
     },
     name: {
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      padding: 5,
+    },
+    foodplace: {
+      margin:11,
+      borderRadius: 8,
+      alignItems: 'center',
+      overflow: 'hidden',
+      backgroundColor: 'white',
+      padding: 11,
+      justifyContent: 'center',
+    },
+    map: {
+      width: 330,
+      height: 200,
+      margin: 16,
+      
+     
+
+    },
+    container: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      
+    },
+    title: {
+      margin: 16,
+    },
+    lineItems: {
+      padding: 5,
+      alignItems: 'center',
+    },
+    mapBox: {
+      backgroundColor: 'white',
+      borderRadius: 8,
     }
   });
 

@@ -6,6 +6,8 @@ import RestList from '../components/Restaurant';
 //import * as Location from 'expo-location';
 import { NavigationHelpersContext } from '@react-navigation/native';
 //import MapScreen from './MapScreen';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { LinearGradient } from 'expo-linear-gradient';
 
 const RestaurantScreen = ( { route, navigation }) => {
 
@@ -48,6 +50,8 @@ const RestaurantScreen = ( { route, navigation }) => {
 
    console.log('RScreen', state)
    return (
+    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
+    <LinearGradient colors={['#cfe3e6','#68b8c1']} style={styles.container}>
      <View>
      <RestList restaurants={filterByPrice('$')} title="Dirty Kitchen" />
      <RestList restaurants={filterByPrice('$$')} title="Middle of the Road" />
@@ -62,11 +66,16 @@ const RestaurantScreen = ( { route, navigation }) => {
          }
          />
    </View>
+   </LinearGradient>
+   </KeyboardAwareScrollView>
  );
+}
 
  const styles = StyleSheet.create({
+  container: {
+    flex:1,
+  }
  });
 
-}
 
 export default RestaurantScreen
