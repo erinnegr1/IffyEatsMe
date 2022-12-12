@@ -1,3 +1,3 @@
-# Iffy-Eats
+# OracleEats
 
-An app for those who are indecisive on what to eat. Feed your hangry!
+The Universe knows what you should eat. All you have to do is ask...
