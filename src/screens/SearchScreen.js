@@ -36,7 +36,7 @@ const SearchScreen = () => {
         <LinearGradient colors={['#cfe3e6','#68b8c1']} style={styles.container}>
         <View style={styles.container}>
         <View style={styles.inputContainer}>
-        <Text style={styles.text}>We'll feed you!</Text>
+        <Text style={styles.text}>Ask the Oracle!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
@@ -112,6 +112,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
       },
+      text: {
+        fontWeight: 'bold',
+      }
      
       
 });
