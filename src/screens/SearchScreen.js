@@ -35,7 +35,7 @@ const SearchScreen = () => {
          <ImageBackground source={require("../assets/galaxy.jpg")} resizeMode="cover" style={styles.backgroundImage}>
         <View style={styles.container}>
         <View style={styles.inputContainer}>
-        <Text style={{color:'white'}}>Can't decide? Ask the Oracle!</Text>
+        <Text style={{color:'white', fontWeight: 'bold'}}>Can't decide? Ask the Oracle!</Text>
         <SearchBar
          address = {userAddress}
          onSearchChange={setUserAddress}
@@ -75,9 +75,9 @@ const styles = StyleSheet.create({
         font: 'white',
         alignItems: 'center',
         padding:9,
-        marginTop: 100,
+        marginTop: 50,
         marginHorizontal: 24,
-        backgroundColor: '#26007B',
+        backgroundColor: '#240d54',
         borderRadius: 8,
         elevation: 4,
         shadowColor: 'white',
@@ -93,15 +93,15 @@ const styles = StyleSheet.create({
       },
       button: {
         
-        backgroundColor: '#7A00B2',
+        backgroundColor: '#42218a',
         borderRadius:8,
         paddingVertical: 8,
         paddingHorizontal: 16,
         elevation: 2,
         marginTop: 10,
         shadowColor: 'white',
-        shadowOffset: {width: 0, height: 4 },
-        shadowRadius: 6,
+        shadowOffset: {width: 0, height: 1 },
+        shadowRadius: 0,
         shadowOpacity:0.25,
 
 

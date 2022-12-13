@@ -33,8 +33,9 @@ const RestDetails = ({restaurant}) => {
   } 
 
     return (
-      <View>
+      <View style={styles.outerContainer}>
         <Text> It was written in the stars... </Text>
+        <View style={styles.foodplace}>
         <Text>{restaurant.name}</Text>
         <Image style={styles.image} source={{uri: restaurant.image_url}} /> 
         <Text>
@@ -44,6 +45,7 @@ const RestDetails = ({restaurant}) => {
             onPress={() => Linking.openURL(restaurant.url)}>
             View Menu
       </Text>
+      </View>
       <Image 
           style={{width: 400, height: 200}}
           source={{uri: staticMapConstructor(coords.lat, coords.long)
@@ -61,6 +63,14 @@ const styles = StyleSheet.create({
     },
     name: {
       fontWeight: 'bold'
+    },
+    outerContainer: {
+      alignItems: 'center',
+    },
+    foodplace: {
+      backgroundColor: '#F0EEEE',
+      padding: 60,
+      borderRadius: 300,
     }
   });
 
