@@ -13,8 +13,21 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
 
-      <Stack.Screen name="Search" component={SearchScreen} />
-      <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+      <Stack.Screen 
+      name="Search" component={SearchScreen}
+      options={{
+        headerStyle: {
+          backgroundColor: '#68b8c1',
+        }
+      }} />
+      <Stack.Screen 
+      name="Restaurant" component={RestaurantScreen} 
+      options={{
+        headerStyle: {
+          backgroundColor: '#68b8c1',
+        }
+      }}
+      />
       
       {/*<Stack.Screen name='Iffy Eats' component={HomeScreen} /> *}
       {/* <Stack.Screen name='Location' component={SetLocation} /> */}
