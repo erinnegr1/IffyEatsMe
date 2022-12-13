@@ -1,3 +1,3 @@
-# OracleEats
+# InstaEats
 
-The Universe knows what you should eat. All you have to do is ask...
+Know where eat.. instantly. 
